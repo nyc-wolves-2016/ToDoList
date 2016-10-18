@@ -22,15 +22,17 @@
     <ul class="">
       <% if logged_in? %>
         <li><a href="/">Home</a></li>
-        <li><a href=""><%= current_user.username %></a></li>
+        <li><a href="/users/<%= current_user.id %>"><%= current_user.username %></a></li>
         <li><a href="/logout">Logout</a></li>
       <% else %>
         <li><a href="/">Home</a></li>
-        <li><a href="/register">Register</a></li>
-        <li><a href="/login">Login</a></li>
+        <li><a href="/users/new">Register</a></li>
+        <li><a href="/sessions/new">Login</a></li>
       <% end %>
     </ul>
   </nav>
-  <%= yield %>
+  <div class="container">
+    <%= yield %>
+  </div>
 </body>
 </html>

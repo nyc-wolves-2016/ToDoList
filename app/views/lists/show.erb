@@ -1,28 +1,30 @@
-<h1><%= @list.name %></h1>
-<h3>Tasks</h3>
-<% if !logged_in? %>
-  <div>
-    <% @tasks.each do |task| %>
-      <article id="<%= task.id %>">
-        <p><%= task.description %></p>
-        <p>Completed: <%= task.completed %></p>
-      </article>
-    <% end %>
-  </div>
-<% elsif logged_in? %>
-  <div><a href="/lists/<%= @list.id %>/tasks/new">Create New Task</a></div>
-  <div>
-    <% @tasks.each do |task| %>
-      <article id="<%= task.id %>">
-        <p><%= task.description %></p>
-        <p>Completed: <%= task.completed %></p>
-        <p><a href="/lists/<%= @list.id %>/tasks/<%= task.id %>">View</a></p>
-        <p><a href="/lists/<%= @list.id %>/tasks/<%= task.id %>/edit">Edit</a></p>
-        <form action="/lists/<%= @list.id %>/tasks/<%= task.id %>" method="post">
-          <input type="hidden" name="_method" value="delete">
-          <input type="submit" value="Delete">
-        </form>
-      </article>
-    <% end %>
-  </div>
-<% end %>
+<div>
+  <h1><%= @list.name %></h1>
+  <h2>Tasks</h2>
+  <% if !logged_in? %>
+    <div class="container">
+      <% @tasks.each do |task| %>
+        <article id="<%= task.id %>">
+          <p><%= task.description %></p>
+          <p>Completed: <%= task.completed %></p>
+        </article>
+      <% end %>
+    </div>
+  <% elsif logged_in? %>
+    <div><a href="/lists/<%= @list.id %>/tasks/new">Create New Task</a></div>
+    <div>
+      <% @tasks.each do |task| %>
+        <article id="<%= task.id %>" class="container">
+          <h3><<%= task.description %></h3>
+          <p>Completed: <%= task.completed %></p>
+          <p><a href="/lists/<%= @list.id %>/tasks/<%= task.id %>">View Details</a></p>
+          <p><a href="/lists/<%= @list.id %>/tasks/<%= task.id %>/edit">Edit Task</a></p>
+          <form action="/lists/<%= @list.id %>/tasks/<%= task.id %>" method="post">
+            <input type="hidden" name="_method" value="delete">
+            <input type="submit" value="Delete Task">
+          </form>
+        </article>
+      <% end %>
+    </div>
+  <% end %>
+</div>
